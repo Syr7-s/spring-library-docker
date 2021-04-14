@@ -1,4 +1,4 @@
-package com.syrisa.springlibrarydocker.utility.generate;
+package com.syrisa.springlibrarydocker.utility.generate.credentialnumber;
 
 import java.util.Random;
 import java.util.function.Supplier;
