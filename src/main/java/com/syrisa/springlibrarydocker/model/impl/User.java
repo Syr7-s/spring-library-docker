@@ -1,6 +1,7 @@
 package com.syrisa.springlibrarydocker.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.syrisa.springlibrarydocker.dto.UserDto;
 import com.syrisa.springlibrarydocker.utility.gender.Gender;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -31,4 +32,16 @@ public class User {
     private String userEmail;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate userBirthDate;
+
+    public UserDto toUserDto() {
+        return UserDto.builder()
+                .userID(this.userID)
+                .userName(this.userName)
+                .userLastName(this.userLastName)
+                .userGender(this.userGender)
+                .userPhone(this.userPhone)
+                .userEmail(this.userEmail)
+                .userBirthDate(this.userBirthDate)
+                .build();
+    }
 }
