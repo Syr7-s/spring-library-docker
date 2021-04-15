@@ -1,4 +1,6 @@
 package com.syrisa.springlibrarydocker.model.impl;
 
-public class Orders {
+import com.syrisa.springlibrarydocker.model.Model;
+
+public class Orders implements Model {
 }

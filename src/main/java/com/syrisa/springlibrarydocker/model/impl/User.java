@@ -3,6 +3,7 @@ package com.syrisa.springlibrarydocker.model.impl;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syrisa.springlibrarydocker.dto.UserDto;
+import com.syrisa.springlibrarydocker.model.Model;
 import com.syrisa.springlibrarydocker.utility.gender.Gender;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -19,7 +20,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class User {
+public class User implements Model {
     @Id
     private long userID;
     private String userName;

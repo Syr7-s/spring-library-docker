@@ -1,4 +1,4 @@
 package com.syrisa.springlibrarydocker.model;
 
-public interface Entity {
+public interface Model {
 }

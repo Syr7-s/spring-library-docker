@@ -2,6 +2,7 @@ package com.syrisa.springlibrarydocker.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syrisa.springlibrarydocker.dto.AddressDto;
+import com.syrisa.springlibrarydocker.model.Model;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-public class Address {
+public class Address implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int addressID;
