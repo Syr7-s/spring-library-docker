@@ -1,7 +1,9 @@
 package com.syrisa.springlibrarydocker.repository;
 
+import com.syrisa.springlibrarydocker.model.impl.Address;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AddressRepository {
+public interface AddressRepository extends CrudRepository<Address,Integer> {
 }
