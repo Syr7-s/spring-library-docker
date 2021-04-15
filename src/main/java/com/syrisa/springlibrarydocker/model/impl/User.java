@@ -1,6 +1,7 @@
 package com.syrisa.springlibrarydocker.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syrisa.springlibrarydocker.dto.UserDto;
 import com.syrisa.springlibrarydocker.utility.gender.Gender;
 import lombok.*;
@@ -32,6 +33,10 @@ public class User {
     private String userEmail;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate userBirthDate;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    @JsonIgnore
+    private Address address;
 
     public UserDto toUserDto() {
         return UserDto.builder()
@@ -42,6 +47,7 @@ public class User {
                 .userPhone(this.userPhone)
                 .userEmail(this.userEmail)
                 .userBirthDate(this.userBirthDate)
+                .address(this.address)
                 .build();
     }
 }

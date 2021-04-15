@@ -1,6 +1,7 @@
 package com.syrisa.springlibrarydocker.dto;
 
 
+import com.syrisa.springlibrarydocker.model.impl.Address;
 import com.syrisa.springlibrarydocker.model.impl.User;
 import com.syrisa.springlibrarydocker.utility.gender.Gender;
 import lombok.Builder;
@@ -17,6 +18,7 @@ public class UserDto {
     private String userPhone;
     private String userEmail;
     private LocalDate userBirthDate;
+    private Address address;
 
     public User toUser(){
         return User.builder()

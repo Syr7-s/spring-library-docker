@@ -1,5 +1,6 @@
 package com.syrisa.springlibrarydocker.model.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syrisa.springlibrarydocker.dto.AddressDto;
 import lombok.*;
 
@@ -20,7 +21,9 @@ public class Address {
     private String number;
     private String city;
     private int zipcode;
-
+    @OneToOne(mappedBy = "address")
+    @JsonIgnore
+    private User user;
     public AddressDto toAddressDto() {
         return AddressDto.builder()
                 .addressID(this.addressID)
