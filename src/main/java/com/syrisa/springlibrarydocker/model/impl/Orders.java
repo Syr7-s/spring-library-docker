@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -26,12 +27,19 @@ public class Orders implements Model {
     private User user;
     private double total;
 
+    @ManyToMany
+    @JoinTable(name = "order_book",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_isbn"))
+    private List<Book> registeredOrderBook;
+
     public OrdersDto toOrdersDto() {
         return OrdersDto.builder()
                 .id(this.id)
                 .createdAt(this.createdAt)
                 .user(this.user)
                 .total(this.total)
+                .registeredOrderBook(this.registeredOrderBook)
                 .build();
     }
 
