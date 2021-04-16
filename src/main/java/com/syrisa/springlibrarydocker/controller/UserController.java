@@ -33,36 +33,37 @@ public class UserController {
     }
 
     @PutMapping
-    public UserDto update(@RequestBody UserDto userDto){
-        try{
+    public UserDto update(@RequestBody UserDto userDto) {
+        try {
             return userService.update(userDto.toUser()).toUserDto();
-        }catch (Exception exception){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 
     @GetMapping("/{userID}")
-    public UserDto getByUserID(@PathVariable("userID") long userID){
-        try{
+    public UserDto getByUserID(@PathVariable("userID") long userID) {
+        try {
             return userService.getById(userID).toUserDto();
-        }catch (Exception exception){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
 
-    @GetMapping(value = "/users",params = {"page","size"})
-    public List<UserDto> getAll(@Min(0) int page,@Min(0) int size){
+    @GetMapping(value = "/users", params = {"page", "size"})
+    public List<UserDto> getAll(@Min(0) int page, @Min(0) int size) {
         return userService.getAll(PageRequest.of(page, size))
                 .stream()
                 .map(User::toUserDto)
                 .collect(Collectors.toList());
     }
+
     @DeleteMapping("/undo/{userID}")
-    public String delete(@PathVariable("userID") long userID){
-        try{
+    public String delete(@PathVariable("userID") long userID) {
+        try {
             return userService.delete(userID);
-        }catch (Exception exception){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 }
