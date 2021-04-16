@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -38,6 +39,8 @@ public class User implements Model {
     @JoinColumn(name = "address_id")
     @JsonIgnore
     private Address address;
+    @OneToMany(mappedBy = "user")
+    private List<Orders> orders;
 
     public UserDto toUserDto() {
         return UserDto.builder()

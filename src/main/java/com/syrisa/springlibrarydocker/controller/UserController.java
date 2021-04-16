@@ -32,7 +32,7 @@ public class UserController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public UserDto update(@RequestBody UserDto userDto) {
         try {
             return userService.update(userDto.toUser()).toUserDto();
