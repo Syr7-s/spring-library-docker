@@ -62,5 +62,4 @@ public class CategoryServiceImpl implements CategoryService {
         return id + " numbered category was deleted.";
     }
 
-
 }

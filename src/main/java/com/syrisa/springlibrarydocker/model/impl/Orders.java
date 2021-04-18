@@ -26,7 +26,7 @@ public class Orders implements Model {
     private LocalDate createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     private double total;

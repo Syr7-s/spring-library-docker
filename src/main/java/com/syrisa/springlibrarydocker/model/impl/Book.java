@@ -45,7 +45,7 @@ public class Book implements Model {
     @JsonIgnore
     private Category category;
 
-    @ManyToMany(mappedBy = "registeredBook", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "registeredOrderBook", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Orders> orders;
 

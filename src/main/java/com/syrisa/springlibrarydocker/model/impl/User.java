@@ -31,8 +31,7 @@ public class User implements Model {
     @Enumerated(EnumType.STRING)
     private Gender userGender;
 
-    @Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$", message = "Phone Number Ex:+(123)-456-78-90")
-
+    //@Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$", message = "Phone Number Ex:+(123)-456-78-90")
     private String userPhone;
 
     @Pattern(regexp = "^(.+)@(.+)$", message = "email is invalid.")

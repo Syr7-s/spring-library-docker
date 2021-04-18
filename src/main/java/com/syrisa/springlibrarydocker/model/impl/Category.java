@@ -26,7 +26,7 @@ public class Category implements Model {
     @JsonIgnore
     private List<Book> books;
 
-    private CategoryDto toCategoryDto() {
+    public CategoryDto toCategoryDto() {
         return CategoryDto.builder()
                 .categoryId(this.categoryId)
                 .categoryName(this.categoryName)
