@@ -1,6 +1,8 @@
 package com.syrisa.springlibrarydocker.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.syrisa.springlibrarydocker.dto.BookDto;
 import com.syrisa.springlibrarydocker.model.Model;
 import lombok.*;
 
@@ -25,8 +27,10 @@ public class Book implements Model {
     private String bookName;
 
     private String bookDescription;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate bookPublishedDate;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate bookAddedDate;
 
@@ -36,6 +40,31 @@ public class Book implements Model {
 
     private String imageUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private Category category;
+
     @ManyToMany(mappedBy = "registeredBook", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Orders> orders;
+
+    @ManyToMany(mappedBy = "registeredAuthorBook", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Author> authors;
+
+    public BookDto toBookDto() {
+        return BookDto.builder()
+                .bookIsbnNO(this.bookIsbnNO)
+                .bookIsbn(this.bookIsbn)
+                .bookName(this.bookName)
+                .bookDescription(this.bookDescription)
+                .bookPublishedDate(this.bookPublishedDate)
+                .bookAddedDate(this.bookAddedDate)
+                .bookPrice(this.bookPrice)
+                .currency(this.currency)
+                .imageUrl(this.imageUrl)
+                .category(this.category)
+                .build();
+    }
 }

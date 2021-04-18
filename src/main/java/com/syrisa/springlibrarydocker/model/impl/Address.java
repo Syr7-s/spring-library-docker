@@ -18,13 +18,19 @@ public class Address implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int addressID;
+
     private String street;
+
     private String number;
+
     private String city;
+
     private int zipcode;
+
     @OneToOne(mappedBy = "address")
     @JsonIgnore
     private User user;
+
     public AddressDto toAddressDto() {
         return AddressDto.builder()
                 .addressID(this.addressID)

@@ -14,9 +14,13 @@ import java.util.List;
 @Builder
 public class OrdersDto {
     private int id;
+
     private LocalDate createdAt;
+
     private User user;
+
     private double total;
+
     private List<Book> registeredOrderBook;
 
     public Orders toOrders() {

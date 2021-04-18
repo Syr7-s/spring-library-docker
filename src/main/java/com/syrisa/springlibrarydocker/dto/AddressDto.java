@@ -8,9 +8,13 @@ import lombok.Data;
 @Builder
 public class AddressDto {
     private int addressID;
+
     private String street;
+
     private String number;
+
     private String city;
+
     private int zipcode;
 
     public Address toAddress(){

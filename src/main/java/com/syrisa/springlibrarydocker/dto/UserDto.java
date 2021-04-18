@@ -12,12 +12,19 @@ import java.time.LocalDate;
 @Builder
 public class UserDto {
     private long userID;
+
     private String userName;
+
     private String userLastName;
+
     private Gender userGender;
+
     private String userPhone;
+
     private String userEmail;
+
     private LocalDate userBirthDate;
+
     private Address address;
 
     public User toUser(){
