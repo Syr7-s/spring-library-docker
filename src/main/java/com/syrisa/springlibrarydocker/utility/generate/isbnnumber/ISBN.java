@@ -23,12 +23,12 @@ public class ISBN {
 
     };
 
-    private static Integer generateNumber(int number) {
+    private static String generateNumber(int number) {
         StringBuilder generateNu = new StringBuilder();
         for (int i = 0; i < number; i++) {
             generateNu.append(new Random().nextInt(10));
         }
-        return Integer.parseInt(generateNu.toString());
+        return generateNu.toString();
 
     }
 
