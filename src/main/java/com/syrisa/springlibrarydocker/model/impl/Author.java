@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 public class Author implements Model {
     @Id
-    private int authorId;
+    private long authorId;
 
     private String authorName;
 

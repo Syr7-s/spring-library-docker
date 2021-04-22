@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 public class AuthorDto {
 
-    private int authorId;
+    private long authorId;
 
     private String authorName;
 
