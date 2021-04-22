@@ -6,7 +6,9 @@ import com.syrisa.springlibrarydocker.service.AuthorService;
 import com.syrisa.springlibrarydocker.utility.generate.authorid.AuthorId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -36,6 +38,12 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author getByAuthorName(String authorName) {
         return null;
+    }
+
+    @Override
+    public Author getAuthorById(long authorId) {
+        return authorRepository.findById(authorId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Auhtor could not found."));
     }
 
     @Override
