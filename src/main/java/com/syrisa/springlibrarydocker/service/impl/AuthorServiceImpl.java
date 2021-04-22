@@ -3,6 +3,7 @@ package com.syrisa.springlibrarydocker.service.impl;
 import com.syrisa.springlibrarydocker.model.impl.Author;
 import com.syrisa.springlibrarydocker.repository.AuthorRepository;
 import com.syrisa.springlibrarydocker.service.AuthorService;
+import com.syrisa.springlibrarydocker.utility.generate.authorid.AuthorId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author create(Author author) {
+        author.setAuthorId(AuthorId.authorIdGenerate.get());
         return authorRepository.save(author);
     }
 
