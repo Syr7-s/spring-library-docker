@@ -64,7 +64,7 @@ public class AuthorServiceImpl implements AuthorService {
             authorRepository.delete(author);
             return authorId + " named author was deleted.";
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Auhtor not deleted.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Author not deleted.");
         }
     }
 
