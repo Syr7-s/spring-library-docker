@@ -8,5 +8,5 @@ public interface AuthorService extends ModelService<Author> {
 
     Author getAuthorById(long authorId);
 
-    String delete(int authorId);
+    String delete(long authorId);
 }
