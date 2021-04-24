@@ -23,8 +23,12 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author create(Author author) {
-        author.setAuthorId(AuthorId.authorIdGenerate.get());
-        return authorRepository.save(author);
+        try {
+            author.setAuthorId(AuthorId.authorIdGenerate.get());
+            return authorRepository.save(author);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
     }
 
     @Override
