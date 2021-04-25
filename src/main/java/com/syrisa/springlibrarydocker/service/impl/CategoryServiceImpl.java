@@ -22,7 +22,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category create(Category category) {
-        return categoryRepository.save(category);
+        try {
+            Category c = categoryRepository.findCategoryByCategoryName(category.getCategoryName());
+            if (c != null) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, category.getCategoryName() + " named category was defined.");
+            } else {
+                return categoryRepository.save(category);
+            }
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
     }
 
     @Override
