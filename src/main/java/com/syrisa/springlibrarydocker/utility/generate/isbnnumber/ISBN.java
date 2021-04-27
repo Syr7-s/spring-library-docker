@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class ISBN {
+public final class ISBN {
     private ISBN(){
 
     }
