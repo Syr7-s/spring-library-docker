@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderRepository extends CrudRepository<Orders, Integer> {
-    Page findAll(PageRequest pageRequest);
+    Page<Orders> findAll(PageRequest pageRequest);
 
 }
