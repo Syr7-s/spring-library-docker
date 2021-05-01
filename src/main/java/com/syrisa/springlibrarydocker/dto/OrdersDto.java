@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,7 +22,7 @@ public class OrdersDto {
 
     private double total;
 
-    private List<Book> registeredOrderBook;
+    private Set<Book> registeredOrderBook;
 
     public Orders toOrders() {
         return Orders.builder()

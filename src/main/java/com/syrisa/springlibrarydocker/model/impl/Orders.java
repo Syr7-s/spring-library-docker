@@ -9,6 +9,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -36,7 +37,7 @@ public class Orders implements Model {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "book_isbn"))
     @JsonIgnore
-    private List<Book> registeredOrderBook;
+    private Set<Book> registeredOrderBook;
 
     public OrdersDto toOrdersDto() {
         return OrdersDto.builder()
