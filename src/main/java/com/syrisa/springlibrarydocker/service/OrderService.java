@@ -1,4 +1,9 @@
 package com.syrisa.springlibrarydocker.service;
 
-public interface OrderService extends ModelService{
+import com.syrisa.springlibrarydocker.model.impl.Orders;
+
+public interface OrderService extends ModelService {
+    Orders getOrdersByOrdersId(int id);
+
+    String delete(int ordersId);
 }
