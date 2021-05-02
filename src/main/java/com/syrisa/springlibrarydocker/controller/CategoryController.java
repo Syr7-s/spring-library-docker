@@ -42,7 +42,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/categories",params = {"page","size"})
-    public List<CategoryDto> getAll(@Min(value = 0) int page, @Max(value = 1) int size){
+    public List<CategoryDto> getAll(@Min(value = 0) int page, @Min(value = 1) int size){
         return categoryService.getAll(PageRequest.of(page, size))
                 .stream()
                 .map(Category::toCategoryDto)
