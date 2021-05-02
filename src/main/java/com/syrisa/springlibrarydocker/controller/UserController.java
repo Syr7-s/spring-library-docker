@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/users", params = {"page", "size"})
-    public List<UserDto> getAll(@Min(0) int page, @Min(0) int size) {
+    public List<UserDto> getAll(@Min(0) int page, @Min(1) int size) {
         return userService.getAll(PageRequest.of(page, size))
                 .stream()
                 .map(User::toUserDto)
