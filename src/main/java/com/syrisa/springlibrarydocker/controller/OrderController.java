@@ -51,7 +51,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "/orders", params = {"page", "size"})
-    public List<OrdersDto> getOrders(@Min(0) int page, @Max(1) int size) {
+    public List<OrdersDto> getOrders(@Min(0) int page, @Min(1) int size) {
         return orderService.getAll(PageRequest.of(page, size))
                 .stream()
                 .map(Orders::toOrdersDto)
