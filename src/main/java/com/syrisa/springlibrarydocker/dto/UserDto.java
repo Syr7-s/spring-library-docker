@@ -36,6 +36,7 @@ public class UserDto {
                 .userPhone(this.userPhone)
                 .userEmail(this.userEmail)
                 .userBirthDate(userBirthDate)
+                .address(this.address)
                 .build();
     }
 }

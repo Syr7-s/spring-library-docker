@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
             addressRepository.save(user.getAddress());
             return userRepository.save(user);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "User was not registered to the System.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 
