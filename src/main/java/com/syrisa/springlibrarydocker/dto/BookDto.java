@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -35,7 +36,7 @@ public class BookDto {
 
     private List<Orders> orders;
 
-    private List<Author> authors;
+    private Set<Author> authors;
 
     public Book toBook(){
         return Book.builder()
@@ -49,6 +50,7 @@ public class BookDto {
                 .currency(this.currency)
                 .imageUrl(this.imageUrl)
                 .category(this.category)
+                .authors(this.authors)
                 .build();
     }
 }

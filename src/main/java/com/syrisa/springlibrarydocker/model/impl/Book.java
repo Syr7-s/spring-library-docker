@@ -9,6 +9,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -51,7 +52,7 @@ public class Book implements Model {
 
     @ManyToMany(mappedBy = "registeredAuthorBook", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Author> authors;
+    private Set<Author> authors;
 
     public BookDto toBookDto() {
         return BookDto.builder()
@@ -65,6 +66,7 @@ public class Book implements Model {
                 .currency(this.currency)
                 .imageUrl(this.imageUrl)
                 .category(this.category)
+                .authors(this.authors)
                 .build();
     }
 }
