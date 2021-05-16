@@ -1,7 +1,6 @@
 package com.syrisa.springlibrarydocker.service.impl;
 
 
-
 import com.syrisa.springlibrarydocker.model.impl.Book;
 import com.syrisa.springlibrarydocker.model.impl.Orders;
 import com.syrisa.springlibrarydocker.model.impl.User;
@@ -17,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -36,7 +33,6 @@ public class OrderServiceImpl implements OrderService {
         this.userService = userService;
         this.bookService = bookService;
     }
-
 
     @Override
     public Orders create(Orders orders) {
@@ -82,9 +78,10 @@ public class OrderServiceImpl implements OrderService {
 
     private final Function<List<Long>, List<Book>> bookOnSet = bookIsbn -> {
         List<Book> books = new ArrayList<>();
+        Book book;
         for (Long isbn : bookIsbn) {
             try {
-                Book book = bookService.getBookByBookIsbn(isbn);
+                book = bookService.getBookByBookIsbn(isbn);
                 if (book != null) {
                     books.add(book);
                 }
