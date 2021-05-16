@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         try {
-            user.setUserID(CredentialNumber.generateNumber.get());
+            user.setUserID(CredentialNumber.numberGenerate.generateNumber(userIdLength));
             addressRepository.save(user.getAddress());
             return userRepository.save(user);
         } catch (Exception exception) {
@@ -37,11 +37,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user) {
-            if (getById(user.getUserID()) != null) {
-                return userRepository.save(user);
-            }else{
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"User could not updated.");
-            }
+        if (getById(user.getUserID()) != null) {
+            return userRepository.save(user);
+        } else {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "User could not updated.");
+        }
     }
 
     @Override
@@ -57,12 +57,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String delete(long userID) {
-        try{
+        try {
             User user = getById(userID);
             userRepository.delete(user);
-            return userID+" Credentialed user deleted.";
-        }catch (Exception exception){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"User could not deleted.");
+            return userID + " Credentialed user deleted.";
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "User could not deleted.");
         }
     }
 }

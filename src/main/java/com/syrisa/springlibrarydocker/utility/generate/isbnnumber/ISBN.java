@@ -41,5 +41,5 @@ public final class ISBN {
         return Integer.parseInt(generateNu.toString());
     }
 
-    public static Function<String,Long> cleanNotNumber = isbn -> Long.parseLong(isbn.replaceAll("[^0-9]",""));
+    public static final Function<String,Long> cleanNotNumber = isbn -> Long.parseLong(isbn.replaceAll("[^0-9]",""));
 }

@@ -18,10 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -32,7 +29,6 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final CategoryService categoryService;
     private AuthorService authorService;
-    private final List<Book> books = new ArrayList<>();
 
     public BookServiceImpl(BookRepository bookRepository, CategoryService categoryService, AuthorService authorService) {
         this.bookRepository = bookRepository;
@@ -49,13 +45,8 @@ public class BookServiceImpl implements BookService {
             Category category = categoryService.findCategoryByCategoryName(book.getCategory().getCategoryName());
             book.setCategory(category);
             List<String> bookAuthors = book.getAuthors().stream().map(Author::getAuthorName).collect(Collectors.toList());
-            // List<Author> authors = authorCreate.apply(bookAuthors);
             List<Author> authors = writerBook.apply(bookAuthors);
             book.setAuthors(authors);
-
-          /*  Author author = new Author();
-            author.setRegisteredAuthorBook((List<Book>) book);
-            authorService.update()*/
             Book newBook=bookRepository.save(book);
             coreLibrary.regBook(authors, newBook);
             return newBook;
@@ -65,6 +56,7 @@ public class BookServiceImpl implements BookService {
     }
 
     CoreLibrary<List<Author>, Book> coreLibrary = (authors, book) -> {
+        List<Book> books = new ArrayList<>();
         books.add(book);
         for (Author author : authors) {
             author.setRegisteredAuthorBook(books);
@@ -72,18 +64,6 @@ public class BookServiceImpl implements BookService {
         }
     };
 
-    /*
-        private final Function<List<String>, List<Author>> authorCreate = author -> {
-            List<Author> authors = new ArrayList<>();
-            for (String name : author) {
-                Author authorN = new Author();
-                //authorN.setAuthorId(CredentialNumber.generateNumber.get());
-                authorN.setAuthorName(name);
-                authors.add(authorService.create(authorN));
-            }
-            return getAuthors(author, authors);
-        };
-    */
     @Override
     public Book update(Book book) {
         try {

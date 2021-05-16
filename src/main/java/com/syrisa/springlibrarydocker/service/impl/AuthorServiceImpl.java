@@ -23,7 +23,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author create(Author author) {
         try {
-            author.setAuthorId(AuthorId.authorIdGenerate.get());
+            author.setAuthorId(AuthorId.numberGenerate.generateNumber(authorIdLength));
             return authorRepository.save(author);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
@@ -50,19 +50,19 @@ public class AuthorServiceImpl implements AuthorService {
         try {
             return authorRepository.findAuthorByAuthorName(authorName);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Author could not found bt authorByName");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Author could not found by authorByName");
         }
     }
 
     @Override
     public Author getAuthorById(long authorId) {
-        /*return authorRepository.findById(authorId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Auhtor could not found."));*/
-        try {
+        return authorRepository.findById(authorId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Author could not found."));
+      /*  try {
             return authorRepository.findAuthorByAuthorId(authorId);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, authorId + " numbered author not found.");
-        }
+        }*/
     }
 
     @Override
