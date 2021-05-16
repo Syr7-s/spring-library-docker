@@ -9,7 +9,6 @@ import com.syrisa.springlibrarydocker.service.BookService;
 import com.syrisa.springlibrarydocker.service.CategoryService;
 import com.syrisa.springlibrarydocker.service.CoreLibrary;
 import com.syrisa.springlibrarydocker.utility.generate.isbnnumber.ISBN;
-import org.springframework.data.auditing.AuditingHandler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -47,7 +46,7 @@ public class BookServiceImpl implements BookService {
             List<String> bookAuthors = book.getAuthors().stream().map(Author::getAuthorName).collect(Collectors.toList());
             List<Author> authors = writerBook.apply(bookAuthors);
             book.setAuthors(authors);
-            Book newBook=bookRepository.save(book);
+            Book newBook = bookRepository.save(book);
             coreLibrary.regBook(authors, newBook);
             return newBook;
         } catch (Exception exception) {
@@ -55,14 +54,6 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-    CoreLibrary<List<Author>, Book> coreLibrary = (authors, book) -> {
-        List<Book> books = new ArrayList<>();
-        books.add(book);
-        for (Author author : authors) {
-            author.setRegisteredAuthorBook(books);
-            authorService.update(author);
-        }
-    };
 
     @Override
     public Book update(Book book) {
@@ -114,9 +105,10 @@ public class BookServiceImpl implements BookService {
 
     private final Function<List<String>, List<Author>> writerBook = authorName -> {
         List<Author> authors = new ArrayList<>();
+        Author author = null;
         for (String name : authorName) {
             try {
-                Author author = authorService.getByAuthorName(name);
+                author = authorService.getByAuthorName(name);
                 if (author != null) {
                     authors.add(author);
                 }
@@ -134,5 +126,14 @@ public class BookServiceImpl implements BookService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Author not registered on the system.");
         }
     }
+
+    CoreLibrary<List<Author>, Book> coreLibrary = (authors, book) -> {
+        List<Book> books = new ArrayList<>();
+        books.add(book);
+        for (Author author : authors) {
+            author.setRegisteredAuthorBook(books);
+            authorService.update(author);
+        }
+    };
 
 }
