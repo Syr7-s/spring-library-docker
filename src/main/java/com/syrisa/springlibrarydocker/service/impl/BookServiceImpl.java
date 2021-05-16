@@ -127,7 +127,7 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-    CoreLibrary<List<Author>, Book> coreLibrary = (authors, book) -> {
+    private final CoreLibrary<List<Author>, Book> coreLibrary = (authors, book) -> {
         List<Book> books = new ArrayList<>();
         books.add(book);
         for (Author author : authors) {
