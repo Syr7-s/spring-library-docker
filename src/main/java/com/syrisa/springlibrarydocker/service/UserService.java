@@ -4,7 +4,7 @@ import com.syrisa.springlibrarydocker.model.impl.User;
 
 public interface UserService extends ModelService<User> {
 
-    int userIdLength = 10;
+    int USER_ID_LENGTH = 10;
 
     User getById(long userID);
 

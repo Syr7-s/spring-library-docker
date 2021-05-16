@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         try {
-            user.setUserID(CredentialNumber.numberGenerate.generateNumber(userIdLength));
+            user.setUserID(CredentialNumber.numberGenerate.generateNumber(USER_ID_LENGTH));
             addressRepository.save(user.getAddress());
             return userRepository.save(user);
         } catch (Exception exception) {
