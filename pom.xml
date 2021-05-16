@@ -92,6 +92,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>spring-library-docker</finalName>
     </build>
 
 </project>
