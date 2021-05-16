@@ -105,7 +105,7 @@ public class BookServiceImpl implements BookService {
 
     private final Function<List<String>, List<Author>> writerBook = authorName -> {
         List<Author> authors = new ArrayList<>();
-        Author author = null;
+        Author author;
         for (String name : authorName) {
             try {
                 author = authorService.getByAuthorName(name);
