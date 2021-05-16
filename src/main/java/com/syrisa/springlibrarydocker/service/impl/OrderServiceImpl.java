@@ -1,7 +1,7 @@
 package com.syrisa.springlibrarydocker.service.impl;
 
 
-import com.syrisa.springlibrarydocker.dto.BookDto;
+
 import com.syrisa.springlibrarydocker.model.impl.Book;
 import com.syrisa.springlibrarydocker.model.impl.Orders;
 import com.syrisa.springlibrarydocker.model.impl.User;
@@ -16,8 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -40,8 +42,8 @@ public class OrderServiceImpl implements OrderService {
     public Orders create(Orders orders) {
         try {
             User user = userService.getById(orders.getUser().getUserID());
-            Set<Long> booksISBNs = orders.getRegisteredOrderBook().stream().map(Book::getBookIsbnNO).collect(Collectors.toSet());
-            Set<Book> registerBook = bookOnSet.apply(booksISBNs);
+            List<Long> booksISBNs = orders.getRegisteredOrderBook().stream().map(Book::getBookIsbnNO).collect(Collectors.toList());
+            List<Book> registerBook = bookOnSet.apply(booksISBNs);
             orders.setUser(user);
             orders.setRegisteredOrderBook(registerBook);
             return orderRepository.save(orders);
@@ -78,8 +80,8 @@ public class OrderServiceImpl implements OrderService {
         return ordersId + " numbered order was deleted.";
     }
 
-    private final Function<Set<Long>, Set<Book>> bookOnSet = bookIsbn -> {
-        Set<Book> books = new HashSet<>();
+    private final Function<List<Long>, List<Book>> bookOnSet = bookIsbn -> {
+        List<Book> books = new ArrayList<>();
         for (Long isbn : bookIsbn) {
             try {
                 Book book = bookService.getBookByBookIsbn(isbn);
@@ -93,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
         return getBooks(bookIsbn, books);
     };
 
-    private Set<Book> getBooks(Set<Long> bookIsbn, Set<Book> books) {
+    private List<Book> getBooks(List<Long> bookIsbn, List<Book> books) {
         if (books.size() == bookIsbn.size()) {
             return books;
         } else {

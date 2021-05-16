@@ -37,7 +37,7 @@ public class Orders implements Model {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "book_isbn"))
     @JsonIgnore
-    private Set<Book> registeredOrderBook;
+    private List<Book> registeredOrderBook;
 
     public OrdersDto toOrdersDto() {
         return OrdersDto.builder()

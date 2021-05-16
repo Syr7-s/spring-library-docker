@@ -41,8 +41,8 @@ public class Book implements Model {
 
     private String imageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id",referencedColumnName = "categoryId")
     @JsonIgnore
     private Category category;
 
@@ -52,7 +52,7 @@ public class Book implements Model {
 
     @ManyToMany(mappedBy = "registeredAuthorBook", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Author> authors;
+    private List<Author> authors;
 
     public BookDto toBookDto() {
         return BookDto.builder()

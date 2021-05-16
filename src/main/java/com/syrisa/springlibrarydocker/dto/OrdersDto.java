@@ -22,7 +22,7 @@ public class OrdersDto {
 
     private double total;
 
-    private Set<Book> registeredOrderBook;
+    private List<Book> registeredOrderBook;
 
     public Orders toOrders() {
         return Orders.builder()

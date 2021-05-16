@@ -49,11 +49,12 @@ public class AuthorController {
     }
 
     @GetMapping("/{authorName}/author")
-    public List<AuthorDto> getAuthorByAuthorName(@PathVariable("authorName") String authorName) {
-        return authorService.getByAuthorName(authorName)
-                .stream()
-                .map(Author::toAuthorDto)
-                .collect(Collectors.toList());
+    public AuthorDto getAuthorByAuthorName(@PathVariable("authorName") String authorName) {
+        try {
+            return authorService.getByAuthorName(authorName).toAuthorDto();
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,exception.getMessage());
+        }
     }
 
     @GetMapping("/author/{authorId}")

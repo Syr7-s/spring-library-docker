@@ -6,6 +6,7 @@ import com.syrisa.springlibrarydocker.model.Model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Author implements Model {
 
     private String authorName;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "author_book",
             joinColumns = @JoinColumn(name = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_isbn"))
@@ -32,6 +33,7 @@ public class Author implements Model {
         return AuthorDto.builder()
                 .authorId(this.authorId)
                 .authorName(this.authorName)
+                .registeredAuthorBook(this.registeredAuthorBook)
                 .build();
     }
 }

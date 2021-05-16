@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -47,7 +46,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<Author> getByAuthorName(String authorName) {
+    public Author getByAuthorName(String authorName) {
         try {
             return authorRepository.findAuthorByAuthorName(authorName);
         } catch (Exception exception) {
@@ -57,8 +56,13 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author getAuthorById(long authorId) {
-        return authorRepository.findById(authorId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Auhtor could not found."));
+        /*return authorRepository.findById(authorId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Auhtor could not found."));*/
+        try {
+            return authorRepository.findAuthorByAuthorId(authorId);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, authorId + " numbered author not found.");
+        }
     }
 
     @Override

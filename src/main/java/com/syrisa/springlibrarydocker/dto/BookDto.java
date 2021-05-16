@@ -36,7 +36,7 @@ public class BookDto {
 
     private List<Orders> orders;
 
-    private Set<Author> authors;
+    private List<Author> authors;
 
     public Book toBook(){
         return Book.builder()

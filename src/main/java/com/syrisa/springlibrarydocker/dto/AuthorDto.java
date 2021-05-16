@@ -5,8 +5,9 @@ import com.syrisa.springlibrarydocker.model.impl.Book;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
 
+import java.util.Set;
+import java.util.List;
 @Data
 @Builder
 public class AuthorDto {
@@ -21,6 +22,7 @@ public class AuthorDto {
         return Author.builder()
                 .authorId(this.authorId)
                 .authorName(this.authorName)
+                .registeredAuthorBook(this.registeredAuthorBook)
                 .build();
     }
 }

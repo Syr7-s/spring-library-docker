@@ -6,10 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Long> {
-    List<Author> findAuthorByAuthorName(String authorName);
+    Author findAuthorByAuthorName(String authorName);
+
+    Author findAuthorByAuthorId(Long authorId);
 
     Page<Author> findAll(Pageable pageable);
 }
