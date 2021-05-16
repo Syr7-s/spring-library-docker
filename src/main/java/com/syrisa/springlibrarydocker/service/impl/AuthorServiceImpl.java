@@ -58,11 +58,6 @@ public class AuthorServiceImpl implements AuthorService {
     public Author getAuthorById(long authorId) {
         return authorRepository.findById(authorId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Author could not found."));
-      /*  try {
-            return authorRepository.findAuthorByAuthorId(authorId);
-        } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, authorId + " numbered author not found.");
-        }*/
     }
 
     @Override
