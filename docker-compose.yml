@@ -1,0 +1,44 @@
+version : '3.8'
+services:
+  spring-library:
+      image : mysql:8.0.23
+      environment:
+        MYSQL_ROOT_PASSWORD_FILE: ./run/secrets/mysql-password
+        MYSQL_DATABASE: library
+        MYSQL_USER_NAME: root
+        MYSQL_PASSWORD_FILE: ./run/secrets/mysql-password
+      secrets:
+        - mysql-password
+      ports:
+        - "3306:3306"
+      volumes:
+        - db-data:/var/lib/mysql
+      networks:
+        - spring-library-net
+  spring-library-docker:
+      image: spring-library-docker
+      depends_on:
+        - spring-library
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://spring-library:3306/library?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD_FILE: ./run/secrets/spring-datasource-password
+      secrets:
+        - spring-datasource-password
+      ports:
+        - "8080:8080"
+      networks:
+        - spring-library-net
+secrets:
+  mysql-password:
+    file: ./mysql-password.txt
+  spring-datasource-password:
+    file: ./spring-datasource-password.txt
+volumes:
+  db-data:
+networks:
+  spring-library-net:
+    driver: overlay
+
+
+
