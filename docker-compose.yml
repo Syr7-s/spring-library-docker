@@ -1,6 +1,6 @@
 version : '3.8'
 services:
-  spring-library:
+  docker-mysql:
       image : mysql:8.0.23
       environment:
         MYSQL_ROOT_PASSWORD_FILE: ./run/secrets/mysql-password
@@ -15,12 +15,12 @@ services:
         - db-data:/var/lib/mysql
       networks:
         - spring-library-net
-  spring-library-docker:
-      image: spring-library-docker
+  spring-docker-library:
+      image: spring-docker-library
       depends_on:
-        - spring-library
+        - docker-mysql
       environment:
-        SPRING_DATASOURCE_URL: jdbc:mysql://spring-library:3306/library?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/library?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         SPRING_DATASOURCE_USERNAME: root
         SPRING_DATASOURCE_PASSWORD_FILE: ./run/secrets/spring-datasource-password
       secrets:
