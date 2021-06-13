@@ -15,8 +15,8 @@ services:
         - db-data:/var/lib/mysql
       networks:
         - spring-library-net
-  spring-docker-library:
-      image: spring-docker-library
+  spring-library-docker:
+      image: spring-libray-docker:latest
       depends_on:
         - docker-mysql
       environment:
