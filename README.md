@@ -50,10 +50,59 @@ Before the project run in docker stack.I mean, you have to need docker-compose.y
 
 * docker-compose-yml
 
-![docker-compose](images/docker-compose-image.png)
+![docker-compose](images/docker-compose-img-1.png)
 
 * Docker stack
-  * docker stack deploy -c .\docker-compose.yml spring-library-stack
+  * docker stack deploy -c .\docker-compose.yml spring-stack
+  
+![docker-stack](images/docker-stack-img-1.png)
+
+* docker stack services spring-stack
+
+![docker-stack-services](images/docker-stack-image-2.png)
+
+* docker container ls -a
+
+![docker-container](images/docker-container-image-1.png)
+
+* docker container logs -f 811
+
+![docker-spring-stack](images/docker-stack-spring-img-1.png)
+
+* Swagger (http://localhost:8080/swagger-ui/index.html) 
+
+![swagger-ui](images/swagger-img-1.png)
+
+* Some of tables were filled by user. By the way, You can check content your database from  Intellij IDEA terminal.
+* MySQL connect from terminal. Container name or id should use for connection to the db.
+
+![docker-db-con](images/docker-db-conn-img-1.png)
+
+And -> mysql -u root -p 
+
+![docker-db-con](images/docker-db-conn-img-2.png)
+
+Enter password : enter your db password (For mysql connection)
+
+Library database tables.
+
+![docker-db-tables](images/docker-db-tables-img-1.png)
+
+! use library
+
+![docker-db-img-3](images/docker-db-img-3.png)
+
+- User, Author and Category tables.
+
+![tables](images/docker-db-tables-img4.png)
+
+- Book and Orders
+
+![book-orders](images/docker-tables-book-orders-img.png)
+
+- Auhtor_book, order_book and address tables
+
+![tables_two](images/docker-tables-address-aub-ob-img-1.png)
 
 
 
