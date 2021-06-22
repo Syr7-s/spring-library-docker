@@ -59,7 +59,7 @@ class UserServiceImplTest {
 
     @Test
     void checkEmail(){
-        Mockito.when(userRepository.findById(user.getUserID())).thenReturn(java.util.Optional.ofNullable(user));
+        Mockito.when(userRepository.findById(user.getUserID())).thenReturn(java.util.Optional.of(user));
         Assertions.assertTrue(isRealGmail.test(user.getUserEmail()));
     }
 
