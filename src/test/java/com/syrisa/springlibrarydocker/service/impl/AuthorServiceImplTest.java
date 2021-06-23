@@ -27,7 +27,7 @@ class AuthorServiceImplTest {
     @InjectMocks
     AuthorServiceImpl authorService;
 
-    private static Map<Long, Author> authors = new HashMap<>();
+    private static final Map<Long, Author> authors = new HashMap<>();
 
     @BeforeAll
     static void createAuthor() {
