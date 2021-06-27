@@ -30,9 +30,9 @@ public class UserController {
     public ResponseEntity<URI> create(@RequestBody UserDto userDto) {
         try {
             UserDto editedUser = userService.create(userDto.toUser()).toUserDto();
-            URI location = ServletUriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/v1/")
-                    .path("user")
-                    .buildAndExpand(editedUser.toUser())
+            URI location = ServletUriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/v1/user")
+                    .path("/{userID}")
+                    .buildAndExpand(editedUser.toUser().getUserID())
                     .toUri();
             return ResponseEntity.created(location).build();
         } catch (Exception exception) {
@@ -40,18 +40,7 @@ public class UserController {
         }
     }
 
-    /*
-    *
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserDto create(@RequestBody UserDto userDto) {
-        try {
-            return userService.create(userDto.toUser()).toUserDto();
-        } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-        }
-    }
-    * */
+
     @PutMapping("/update")
     public UserDto update(@RequestBody UserDto userDto) {
         try {
@@ -62,9 +51,9 @@ public class UserController {
     }
 
     @GetMapping("/{userID}")
-    public UserDto getByUserID(@PathVariable("userID") long userID) {
+    public ResponseEntity<UserDto> getByUserID(@PathVariable("userID") long userID) {
         try {
-            return userService.getById(userID).toUserDto();
+            return ResponseEntity.ok(userService.getById(userID).toUserDto());
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }

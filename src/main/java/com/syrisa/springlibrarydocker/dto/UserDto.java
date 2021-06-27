@@ -4,13 +4,17 @@ package com.syrisa.springlibrarydocker.dto;
 import com.syrisa.springlibrarydocker.model.impl.Address;
 import com.syrisa.springlibrarydocker.model.impl.User;
 import com.syrisa.springlibrarydocker.utility.gender.Gender;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class UserDto {
+public class UserDto  {
     private long userID;
 
     private String userName;
