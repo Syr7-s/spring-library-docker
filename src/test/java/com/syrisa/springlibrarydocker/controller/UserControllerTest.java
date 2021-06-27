@@ -13,9 +13,10 @@ import java.time.LocalDate;
 
 class UserControllerTest {
     static RestTemplate restTemplate;
-    private static  UserDto USER_DTO = new UserDto();
+    private static final UserDto USER_DTO = new UserDto();
     private static URI uri;
     private static final String REQUEST_URI = "http://localhost:8080/api/v1/user";
+
     @BeforeAll
     static void init() {
         restTemplate = new RestTemplate();
@@ -31,7 +32,7 @@ class UserControllerTest {
     }
 
     @BeforeEach
-    void set(){
+    void set() {
         uri = restTemplate.postForLocation(REQUEST_URI, USER_DTO);
     }
 
@@ -57,7 +58,7 @@ class UserControllerTest {
     void deleteProcess() {
         UserDto editedCustomer = restTemplate.getForObject(uri, UserDto.class);
         assert editedCustomer != null;
-        restTemplate.delete(REQUEST_URI+"/undo/"+ editedCustomer.getUserID(), UserDto.class);
+        restTemplate.delete(REQUEST_URI + "/undo/" + editedCustomer.getUserID(), UserDto.class);
         Assertions.assertTrue(true);
     }
 
