@@ -32,8 +32,6 @@ class UserControllerTest {
         uri = restTemplate.postForLocation(REQUEST_URI, USER_DTO);
         assert uri != null;
         editedCustomer = restTemplate.getForObject(uri, UserDto.class);
-
-
     }
 
     @Test
