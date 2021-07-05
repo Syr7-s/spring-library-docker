@@ -1,10 +1,7 @@
 package com.syrisa.springlibrarydocker.controller;
 
 import com.syrisa.springlibrarydocker.dto.CategoryDto;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -34,9 +31,8 @@ class CategoryControllerTest {
         Assertions.assertEquals("History",editedCategory.getCategoryName());
     }
 
-    @Test
-    @Order(2)
-    void delete(){
+    @AfterAll
+    static void delete(){
         assert editedCategory != null;
         restTemplate.delete(REQUEST_URI+"/delete/"+editedCategory.getCategoryId(),CATEGORY_DTO);
     }
