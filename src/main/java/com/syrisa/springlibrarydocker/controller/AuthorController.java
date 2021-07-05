@@ -1,4 +1,5 @@
 package com.syrisa.springlibrarydocker.controller;
+import com.syrisa.springlibrarydocker.dto.AuthorDto;
 import com.syrisa.springlibrarydocker.model.impl.Author;
 import com.syrisa.springlibrarydocker.service.AuthorService;
 import org.springframework.data.domain.PageRequest;
@@ -35,16 +36,7 @@ public class AuthorController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
-  /*  @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public AuthorDto create(@RequestBody AuthorDto authorDto) {
-        try {
-            return authorService.create(authorDto.toAuthor()).toAuthorDto();
-        } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-        }
-    }
-*/
+
     @PutMapping("/update")
     public AuthorDto update(@RequestBody AuthorDto authorDto) {
         try {

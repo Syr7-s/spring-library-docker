@@ -1,4 +1,4 @@
-package com.syrisa.springlibrarydocker.controller;
+package com.syrisa.springlibrarydocker.dto;
 
 import com.syrisa.springlibrarydocker.model.impl.Author;
 import com.syrisa.springlibrarydocker.model.impl.Book;
