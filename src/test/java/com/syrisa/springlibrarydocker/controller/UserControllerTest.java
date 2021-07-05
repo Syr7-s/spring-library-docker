@@ -38,7 +38,6 @@ class UserControllerTest {
     @Order(1)
     void save() {
         assert uri != null;
-        // editedCustomer = restTemplate.getForObject(uri, UserDto.class);
         assert editedCustomer != null;
         Assertions.assertEquals("John", editedCustomer.getUserName());
     }
