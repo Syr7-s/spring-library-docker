@@ -1,12 +1,11 @@
 package com.syrisa.springlibrarydocker.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.syrisa.springlibrarydocker.dto.AuthorDto;
+import com.syrisa.springlibrarydocker.controller.AuthorDto;
 import com.syrisa.springlibrarydocker.model.Model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 import java.util.List;
 
 @Entity

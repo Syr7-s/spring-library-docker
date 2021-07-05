@@ -5,10 +5,13 @@ import com.syrisa.springlibrarydocker.model.impl.Book;
 import com.syrisa.springlibrarydocker.service.BookService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.constraints.Min;
+import java.net.URI;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -23,9 +26,14 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BookDto create(@RequestBody BookDto bookDto) {
+    public ResponseEntity<URI> create(@RequestBody BookDto bookDto) {
         try {
-            return bookService.create(bookDto.toBook()).toBookDto();
+            BookDto editedBook = bookService.create(bookDto.toBook()).toBookDto();
+            URI location = ServletUriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/v1/book")
+                    .path("/{bookName}")
+                    .buildAndExpand(editedBook.toBook().getBookName())
+                    .toUri();
+            return ResponseEntity.created(location).build();
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }

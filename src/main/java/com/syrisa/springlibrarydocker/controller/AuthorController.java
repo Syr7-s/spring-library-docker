@@ -1,17 +1,17 @@
 package com.syrisa.springlibrarydocker.controller;
-
-import com.syrisa.springlibrarydocker.dto.AuthorDto;
 import com.syrisa.springlibrarydocker.model.impl.Author;
 import com.syrisa.springlibrarydocker.service.AuthorService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.constraints.Min;
-import java.util.List;
+import java.net.URI;
 import java.util.stream.Collectors;
-
+import java.util.List;
 @RestController
 @RequestMapping("/api/v1/author")
 public class AuthorController {
@@ -23,6 +23,20 @@ public class AuthorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<URI> create(@RequestBody AuthorDto authorDto) {
+        try {
+            AuthorDto editedAuthor = authorService.create(authorDto.toAuthor()).toAuthorDto();
+            URI location = ServletUriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/v1/author")
+                    .path("/{authorName}/author")
+                    .buildAndExpand(editedAuthor.toAuthor().getAuthorName())
+                    .toUri();
+            return ResponseEntity.created(location).build();
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+  /*  @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public AuthorDto create(@RequestBody AuthorDto authorDto) {
         try {
             return authorService.create(authorDto.toAuthor()).toAuthorDto();
@@ -30,7 +44,7 @@ public class AuthorController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
-
+*/
     @PutMapping("/update")
     public AuthorDto update(@RequestBody AuthorDto authorDto) {
         try {
