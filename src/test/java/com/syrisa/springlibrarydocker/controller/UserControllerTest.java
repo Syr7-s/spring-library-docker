@@ -53,12 +53,10 @@ class UserControllerTest {
         Assertions.assertEquals(Gender.MALE, editedCustomer.getUserGender());
     }
 
-    @Test
-    @Order(3)
-    void deleteProcess() {
+    @AfterAll
+    static void delete() {
         assert editedCustomer != null;
         restTemplate.delete(REQUEST_URI + "/undo/" + editedCustomer.getUserID(), USER_DTO);
-        Assertions.assertTrue(true);
     }
 
     private static Address createAddress() {
