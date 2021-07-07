@@ -2,8 +2,10 @@ package com.syrisa.springlibrarydocker.service;
 
 import com.syrisa.springlibrarydocker.model.impl.Orders;
 
-public interface OrderService extends ModelService <Orders>{
-    Orders getOrdersByOrdersId(int id);
+public interface OrderService extends ModelService<Orders> {
+    int ORDER_ID_LENGTH = 10;
 
-    String delete(int ordersId);
+    Orders getOrdersByOrdersId(long id);
+
+    String delete(long ordersId);
 }

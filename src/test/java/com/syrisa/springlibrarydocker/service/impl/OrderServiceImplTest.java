@@ -42,7 +42,7 @@ class OrderServiceImplTest {
 
     @BeforeAll
     static void init() {
-        order.setId(1);
+        order.setId(1L);
         order.setCreatedAt(LocalDate.of(2021, 1, 1));
         order.setUser(createUser());
         order.setTotal(2);
@@ -65,13 +65,13 @@ class OrderServiceImplTest {
 
     @Test
     void getOrdersByOrdersId() {
-        Mockito.when(orderRepository.findById(1)).thenReturn(java.util.Optional.of(order));
+        Mockito.when(orderRepository.findById(1L)).thenReturn(java.util.Optional.of(order));
         Assertions.assertEquals("John", orderService.getOrdersByOrdersId(1).getUser().getUserName());
     }
 
     @Test
     void checkTotalCount() {
-        Mockito.when(orderRepository.findById(1)).thenReturn(java.util.Optional.of(order));
+        Mockito.when(orderRepository.findById(1L)).thenReturn(java.util.Optional.of(order));
         Assertions.assertTrue(orderService.getOrdersByOrdersId(1).getTotal() > 0);
     }
 

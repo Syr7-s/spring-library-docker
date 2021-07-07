@@ -20,8 +20,7 @@ import java.util.List;
 @Builder
 public class Orders implements Model {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;

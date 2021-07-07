@@ -8,6 +8,7 @@ import com.syrisa.springlibrarydocker.repository.OrderRepository;
 import com.syrisa.springlibrarydocker.service.BookService;
 import com.syrisa.springlibrarydocker.service.OrderService;
 import com.syrisa.springlibrarydocker.service.UserService;
+import com.syrisa.springlibrarydocker.utility.generate.orderid.OrderId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
             User user = userService.getById(orders.getUser().getUserID());
             List<Long> booksISBNs = orders.getRegisteredOrderBook().stream().map(Book::getBookIsbnNO).collect(Collectors.toList());
             List<Book> registerBook = bookOnSet.apply(booksISBNs);
+            orders.setId(OrderId.orderId.generateNumber(ORDER_ID_LENGTH));
             orders.setUser(user);
             orders.setRegisteredOrderBook(registerBook);
             return orderRepository.save(orders);
@@ -64,13 +66,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Orders getOrdersByOrdersId(int id) {
+    public Orders getOrdersByOrdersId(long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, id + " numbered book was not found."));
     }
 
     @Override
-    public String delete(int ordersId) {
+    public String delete(long ordersId) {
         Orders order = getOrdersByOrdersId(ordersId);
         orderRepository.delete(order);
         return ordersId + " numbered order was deleted.";
