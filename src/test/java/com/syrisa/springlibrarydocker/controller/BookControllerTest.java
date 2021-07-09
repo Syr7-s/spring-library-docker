@@ -74,7 +74,7 @@ class BookControllerTest {
 
     private static List<Author> authorCreate() {
         Author author = new Author();
-        author.setAuthorName("John Steinbeck");
+        author.setAuthorName("JohnSteinbeck");
         URI uriAuthor = restTemplate.postForLocation(REQUEST_URI_AUTHOR, author);
         List<Author> authors = new ArrayList<>();
         assert uriAuthor != null;
