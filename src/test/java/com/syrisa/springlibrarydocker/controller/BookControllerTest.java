@@ -25,7 +25,7 @@ class BookControllerTest {
     @BeforeAll
     static void init() {
         restTemplate = new RestTemplate();
-        BOOK_DTO.setBookName("TheGrapesofWrath");
+        BOOK_DTO.setBookName("TheGrapesOfWrath");
         BOOK_DTO.setBookDescription("writer by John Steinbeck");
         BOOK_DTO.setBookPublishedDate(LocalDate.of(1940, 1, 1));
         BOOK_DTO.setBookAddedDate(LocalDate.of(2015, 1, 1));

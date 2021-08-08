@@ -1,8 +1,6 @@
 package com.syrisa.springlibrarydocker.controller;
 
-import com.syrisa.springlibrarydocker.dto.BookDto;
 import com.syrisa.springlibrarydocker.dto.OrdersDto;
-import com.syrisa.springlibrarydocker.dto.UserDto;
 import com.syrisa.springlibrarydocker.model.impl.*;
 import com.syrisa.springlibrarydocker.utility.gender.Gender;
 import org.junit.jupiter.api.AfterAll;
@@ -15,7 +13,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-
 
 class OrderControllerTest {
     static RestTemplate restTemplate;
@@ -83,7 +80,7 @@ class OrderControllerTest {
 
     private static List<Book> book() {
         Book book = new Book();
-        book.setBookName("TheGrapesofWrath");
+        book.setBookName("TheGrapesOfWrath");
         book.setBookDescription("writer by John Steinbeck");
         book.setBookPublishedDate(LocalDate.of(1940, 1, 1));
         book.setBookAddedDate(LocalDate.of(2015, 1, 1));
@@ -111,7 +108,7 @@ class OrderControllerTest {
 
     private static List<Author> authorCreate() {
         Author author = new Author();
-        author.setAuthorName("John Steinbeck");
+        author.setAuthorName("JohnSteinbeck");
         URI uriAuthor = restTemplate.postForLocation(URI_AUTHOR, author);
         List<Author> authors = new ArrayList<>();
         assert uriAuthor != null;
